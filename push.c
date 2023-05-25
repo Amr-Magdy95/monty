@@ -10,7 +10,7 @@ void push(stack_t **head, unsigned int line_number)
 	stack_t *newNode;
 	char *num;
 
-	num = strtok(NULL, "\n \t\r");
+	num = strtok(NULL, "\n \t\r$");
 	if (num == NULL)
 	{
 		printf("L%u: usage: push integer\n", line_number);
@@ -28,6 +28,7 @@ void push(stack_t **head, unsigned int line_number)
 	if ((*head) != NULL)
 		(*head)->prev = newNode;
 	(*head) = newNode;
+	free(num);
 
 
 }

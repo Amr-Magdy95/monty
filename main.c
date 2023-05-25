@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 	size_t len = 0;
 	ssize_t read;
 	unsigned int num;
-	stack_t *head = NULL;
+	stack_t *head = NULL, *temp;
 
 
 	if (argc != 2)
@@ -31,6 +31,7 @@ int main(int argc, char *argv[])
 	{
 		cmd = strtok(line, "\n \t\r");
 		num++;
+		printf("the line is: %s\n", cmd);
 
 		if (cmd)
 		{
@@ -41,6 +42,14 @@ int main(int argc, char *argv[])
 	if (line)
 	{
 		free(line);
+	}
+	free(line);
+	free(cmd);
+	while(head != NULL)
+	{
+		temp = head;
+		head = head->next;
+		free(temp);
 	}
 	return (0);
 
