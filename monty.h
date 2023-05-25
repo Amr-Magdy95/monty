@@ -1,13 +1,12 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
-#define  _GNU_SOURCE
-#include <stdlib.h>
+#define  _POSIX_C_SOURCE 200809L
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>
-
 #include <stdbool.h>
 #include <string.h>
 /**
