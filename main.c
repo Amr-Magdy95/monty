@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 	}
 	while ((read = getline(&line, &len, file)) != -1)
 	{
-		cmd = strtok(line, "\n \t\r$");
+		cmd = strtok(line, "\n \t\r");
 		num++;
 
 		if (cmd)
