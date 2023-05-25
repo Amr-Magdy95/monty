@@ -2,7 +2,7 @@
 
 /**
  * pint - prints the value at the top of the stack, followed by a new line.
- * @stack: double pointer to the head of the stack
+ * @head: double pointer to the head of the stack
  * @line_number: the number of the line in file
  *
  * Return: void
