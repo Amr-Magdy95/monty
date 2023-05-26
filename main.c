@@ -1,19 +1,19 @@
 #include "monty.h"
+bus_t bus = {NULL, NULL, NULL, 0};
 /**
- * main - main entry for the program
- * @argc: num of cmd args
- * @argv: array of cmd args
- * Return: 0 for success
- */
+* main - monty code interpreter
+* @argc: number of arguments
+* @argv: monty file location
+* Return: 0 on success
+*/
 int main(int argc, char *argv[])
 {
+	char *content;
 	FILE *file;
-	char *line = NULL, *cmd;
-	size_t len = 0;
-	ssize_t read;
-	unsigned int num;
-	stack_t *head = NULL, *temp;
-
+	size_t size = 0;
+	ssize_t read_line = 1;
+	stack_t *stack = NULL;
+	unsigned int counter = 0;
 
 	if (argc != 2)
 	{
@@ -21,33 +21,25 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 	file = fopen(argv[1], "r");
-
+	bus.file = file;
 	if (!file)
 	{
 		fprintf(stderr, "Error: Can't open file %s\n", argv[1]);
 		exit(EXIT_FAILURE);
 	}
-	while ((read = getline(&line, &len, file)) != -1)
+	while (read_line > 0)
 	{
-		cmd = strtok(line, "\n \t\r$");
-		num++;
-
-		if (cmd)
+		content = NULL;
+		read_line = getline(&content, &size, file);
+		bus.content = content;
+		counter++;
+		if (read_line > 0)
 		{
-			parse_command(&head, cmd, num);
+			execute(content, &stack, counter, file);
 		}
+		free(content);
 	}
+	free_stack(stack);
 	fclose(file);
-	if (line)
-	{
-		free(line);
-	}
-	while (head)
-	{
-		temp = head->next;
-		free(head);
-		head = temp;
-	}
-	return (0);
-
+return (0);
 }
