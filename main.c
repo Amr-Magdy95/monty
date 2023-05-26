@@ -29,9 +29,8 @@ int main(int argc, char *argv[])
 	}
 	while ((read = getline(&line, &len, file)) != -1)
 	{
-		cmd = strtok(line, "\n \t\r");
+		cmd = strtok(line, "\n \t\r$");
 		num++;
-		printf("the line is: %s\n", cmd);
 
 		if (cmd)
 		{
@@ -43,13 +42,11 @@ int main(int argc, char *argv[])
 	{
 		free(line);
 	}
-	free(line);
-	free(cmd);
-	while(head != NULL)
+	while (head)
 	{
-		temp = head;
-		head = head->next;
-		free(temp);
+		temp = head->next;
+		free(head);
+		head = temp;
 	}
 	return (0);
 
